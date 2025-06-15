@@ -1,4 +1,7 @@
 const User = {
+    get: (req, res) => {
+        res.status(200).send('User ' + req.params.id);
+    },
     list: (req, res) => {
         res.status(200).send('List of users');
     },
