@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
-
-mongoose.connect('mongodb+srv://0xtakemichi:Womb4NastinessHandworkGalley@cluster0.xwv8nwh.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0')
+// change user, cluster and password
+mongoose.connect('')
 
 const User = mongoose.model('User', {
     username: String,
