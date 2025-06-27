@@ -16,10 +16,25 @@ const User = {
         res.status(201).send(savedUser._id);
     },
     update: async (req, res) => {
-        res.status(204).send('User updated successfully');
+        const { id } = req.params
+        const user = await Users.findOne({ _id: id })
+        Object.assign(user, req.body)
+        await user.save()
+        res.sendStatus(204)
     },
     destroy: async (req, res) => {
-        res.status(204).send('User deleted successfully');
+        try {
+            const { id } = req.params
+            const user = await Users.findOne({ _id: id })
+            if (!user) {
+                return res.status(404).json({ message: 'User not found' })
+            }
+            await user.deleteOne()
+            res.sendStatus(204)
+        } catch (error) {
+            console.error('Error deleting user:', error)
+            res.status(500).json({ message: 'Error deleting user', error: error.message })
+        }
     },
 }
 
