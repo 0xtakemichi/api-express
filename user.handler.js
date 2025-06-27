@@ -2,7 +2,9 @@ const Users = require('./User')
 
 const User = {
     get: async (req, res) => {
-        res.status(200).send('User ' + req.params.id);
+        const { id } = req.params
+        const user = await Users.findOne({ _id: id })
+        res.status(200).send(user);
     },
     list: async (req, res) => {
         const users = await Users.find()
