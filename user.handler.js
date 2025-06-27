@@ -11,7 +11,9 @@ const User = {
         res.status(200).send(users);
     },
     create: async (req, res) => {
-        res.status(201).send('User created successfully');
+        const user = new Users(req.body)
+        const savedUser = await user.save()
+        res.status(201).send(savedUser._id);
     },
     update: async (req, res) => {
         res.status(204).send('User updated successfully');
